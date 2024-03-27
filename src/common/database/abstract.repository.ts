@@ -2,7 +2,8 @@ import { Logger, NotFoundException } from '@nestjs/common';
 import { FilterQuery, Model, Types, UpdateQuery } from 'mongoose';
 
 import { AbstractDocument } from './abstract.schema';
-import { PaginationDto } from '../dto/pagination.dto';
+
+import { PaginationDto } from '@common/dto/pagination.dto';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;

@@ -6,6 +6,7 @@ export function setupSwagger(app: INestApplication, path: string): void {
     .setTitle('News Feed OpenAPI')
     .setDescription('News Feed OpenAPI')
     .setVersion('1.0.0')
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' }, 'jwt')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

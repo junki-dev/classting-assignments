@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
-import { AbstractDocument } from '../database/abstract.schema';
+import { AbstractDocument } from '@common/database/abstract.schema';
 
 export class PaginationDto<TDocument extends AbstractDocument> {
   @IsNumber()

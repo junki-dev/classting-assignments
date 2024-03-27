@@ -4,7 +4,10 @@
     "paths": {
       "@src/*": ["src/*"],
       "@test/*": ["test/*"],
-      "@common/*": ["src/common/*"]
+      "@common/*": ["src/common/*"],
+      "@schools/*": ["src/schools/*"],
+      "@users/*": ["src/users/*"],
+      "@auth/*": ["src/auth/*"]
     }
   }
 }

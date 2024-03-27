@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
@@ -16,6 +16,8 @@ async function bootstrap() {
   // for OpenAPI
   const swaggerPath = configService.getOrThrow('SWAGGER_PATH');
   setupSwagger(app, swaggerPath);
+
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
   // for hot reload
   if (module.hot) {
