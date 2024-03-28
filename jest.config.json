@@ -1,0 +1,20 @@
+{
+  "moduleFileExtensions": ["js", "json", "ts"],
+  "roots": ["<rootDir>/src"],
+  "modulePaths": ["<rootDir>/src"],
+  "testRegex": ".*\\.spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "collectCoverageFrom": ["**/*.(t|j)s"],
+  "coverageDirectory": "./coverage",
+  "testEnvironment": "node",
+  "moduleNameMapper": {
+    "^@src/(.*)$": "<rootDir>/src/$1/",
+    "^@test/(.*)$": "<rootDir>/test/$1/",
+    "^@common/(.*)$": "<rootDir>/src/common/$1/",
+    "^@schools/(.*)$": "<rootDir>/src/schools/$1/",
+    "^@users/(.*)$": "<rootDir>/src/users/$1/",
+    "^@auth/(.*)$": "<rootDir>/src/auth/$1/"
+  }
+}

@@ -40,7 +40,7 @@ export class AuthService {
    * @param {UserDocument} user
    * @returns {Promise<string>}
    */
-  async signIn(user: UserDocument) {
+  async signIn(user: UserDocument): Promise<{ token: string }> {
     const tokenPayload: TokenPayload = {
       userId: user._id.toHexString(),
       role: user.role,
@@ -49,7 +49,7 @@ export class AuthService {
     const expires = new Date();
     expires.setSeconds(expires.getSeconds() + this.configService.get('JWT_EXPIRATION'));
 
-    return this.jwtService.sign(tokenPayload);
+    return { token: this.jwtService.sign(tokenPayload) };
   }
 
   /**

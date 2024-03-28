@@ -1,7 +1,19 @@
 services:
 
+  news-feed-api:
+    build:
+      context: .
+      dockerfile: ./dockerfile
+      target: development
+    command: yarn start:dev
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/app
+    depends_on:
+      - mongo
+
   mongo:
-    container_name: mongodb
     image: mongo:6.0.6
     restart: always
     ports:

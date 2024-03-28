@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpStatus, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, HttpStatus } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger';
 
 import { SchoolsService } from './schools.service';
@@ -7,50 +7,64 @@ import { Roles } from '@auth/decorators/roles.decorator';
 import { RoleEnum } from '@auth/enum/role.enum';
 import { JwtAuthGuard } from '@auth/guards/jwt-auth.guard';
 import { RolesGuard } from '@auth/guards/roles.guard';
-import { CreateNewsDto } from '@schools/dto/create-news.dto';
+import { CurrentUser } from '@common/decorators/current-user.decorator';
+import { CreateFeedDto } from '@schools/dto/create-feed.dto';
 import { CreateSchoolPageDto } from '@schools/dto/create-school-page.dto';
+import { UpdateFeedDto } from '@schools/dto/update-feed.dto';
+import { SchoolDocument } from '@schools/models/school.schema';
+import { UserDocument } from '@users/models/user.schema';
 
 @ApiTags('schools')
 @ApiSecurity('jwt')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(RoleEnum.Admin)
 @Controller('schools')
 // @UseGuards(JwtAuthGuard, RolesGuard)
 export class SchoolsController {
   constructor(private readonly schoolsService: SchoolsService) {}
 
+  @ApiOperation({ description: 'get all schools', summary: 'get all schools' })
+  @ApiResponse({ status: HttpStatus.OK, description: `school page list` })
+  @Get()
+  getAllSchools(): Promise<SchoolDocument[]> {
+    return this.schoolsService.getAllSchools();
+  }
+
   @ApiOperation({ description: 'create a school page', summary: 'create a school page' })
   @ApiResponse({ status: HttpStatus.CREATED, description: 'succeed to create a school page' })
   @Post()
-  createSchoolPage(@Body() createSchoolDto: CreateSchoolPageDto) {
-    return 'create a school page';
+  @Roles(RoleEnum.Admin)
+  createSchoolPage(@CurrentUser() user: UserDocument, @Body() createSchoolPageDto: CreateSchoolPageDto): Promise<void> {
+    createSchoolPageDto.adminId = user._id;
+    return this.schoolsService.createSchoolPage(createSchoolPageDto);
   }
 
-  @ApiOperation({ description: 'create news within a school page', summary: 'create news within a school page' })
-  @ApiResponse({ status: HttpStatus.CREATED, description: 'succeed to create a news within a school page' })
-  @Post('/news')
-  createNews(@Body() createNewsDto: CreateNewsDto) {
-    return 'create news within a school page';
+  @ApiOperation({ description: 'create feed within a school page', summary: 'create feed within a school page' })
+  @ApiResponse({ status: HttpStatus.CREATED, description: 'succeed to create a feed within a school page' })
+  @Post('/feeds')
+  @Roles(RoleEnum.Admin)
+  createFeed(@CurrentUser() user: UserDocument, @Body() createNewsDto: CreateFeedDto): Promise<void> {
+    createNewsDto.adminId = user._id;
+    return this.schoolsService.createFeed(createNewsDto);
   }
 
-  @ApiOperation({ description: 'get a school page by id', summary: 'get a school page by id' })
-  @ApiResponse({ status: HttpStatus.OK, description: `school page` })
-  @Get(':id')
-  getSchoolById(@Param('id', ParseIntPipe) id: number) {
-    return `get a school page by id, id=${id}`;
+  @ApiOperation({ description: 'update feed', summary: 'update feed' })
+  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: `succeed to update feed` })
+  @Patch('/feeds/:feedId')
+  @Roles(RoleEnum.Admin)
+  updateFeed(
+    @CurrentUser() user: UserDocument,
+    @Param('feedId') feedId: string,
+    @Body() updateFeedDto: UpdateFeedDto,
+  ): Promise<void> {
+    updateFeedDto.adminId = user._id;
+    return this.schoolsService.updateFeed(feedId, updateFeedDto);
   }
 
-  @ApiOperation({ description: 'update news', summary: 'update news' })
-  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: `succeed to update news` })
-  @Patch('/news/:newsId')
-  updateNews(@Param('newsId', ParseIntPipe) newsId: number) {
-    return `update news, id=${newsId}`;
-  }
-
-  @ApiOperation({ description: 'delete news', summary: 'delete news' })
-  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: `succeed to delete news` })
-  @Delete('/news/:newsId')
-  deleteNews(@Param('newsId', ParseIntPipe) newsId: number) {
-    return `delete news, id=${newsId}`;
+  @ApiOperation({ description: 'delete feed', summary: 'delete feed' })
+  @ApiResponse({ status: HttpStatus.NO_CONTENT, description: `succeed to delete feed` })
+  @Delete('/feeds/:feedId')
+  @Roles(RoleEnum.Admin)
+  deleteFeed(@Param('feedId') feedId: string): Promise<void> {
+    return this.schoolsService.deleteFeed(feedId);
   }
 }

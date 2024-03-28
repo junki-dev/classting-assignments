@@ -7,12 +7,18 @@ news-feed-api
 - Yarn
 - Jest
 - MongoDB
+- Docker, Docker-compose
 - OpenAPI
 
 ## Getting Start
 
-### Installation
+### Running Applications
 ```bash
-$ yarn
+$ docker-compose up -d
+```
+
+### Stopping Applications
+```bash
+$ docker-compose down
 ```
 
