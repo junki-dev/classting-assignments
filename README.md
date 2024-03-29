@@ -22,3 +22,10 @@ $ docker-compose up -d
 $ docker-compose down
 ```
 
+### Testing
+```bash
+$ yarn test:e2e
+
+$ yarn test:e2e-cov
+```
+

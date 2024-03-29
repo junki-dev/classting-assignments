@@ -12,7 +12,7 @@ import { FeedsRepository } from '@schools/repositories/feeds.repository';
 import { SchoolsRepository } from '@schools/repositories/schools.repository';
 import { SchoolsController } from '@schools/schools.controller';
 import { SchoolsService } from '@schools/schools.service';
-import { mockSchool1FeedDocumentList, mockSchoolDocumentList } from '@test/mocks';
+import { mockSchool1FeedDocumentList1, mockSchoolDocumentList } from '@test/mocks';
 
 describe('Schools (e2e)', () => {
   let app: INestApplication;
@@ -124,7 +124,7 @@ describe('Schools (e2e)', () => {
 
     describe('성공 시', () => {
       it('201 상태를 반환합니다.', async () => {
-        jest.spyOn(feedsRepository, 'create').mockResolvedValueOnce(mockSchool1FeedDocumentList[0]);
+        jest.spyOn(feedsRepository, 'create').mockResolvedValueOnce(mockSchool1FeedDocumentList1[0]);
 
         return request(app.getHttpServer()).post('/schools/feeds').send(createFeedDto).expect(201);
       });
@@ -147,7 +147,7 @@ describe('Schools (e2e)', () => {
     describe('성공 시', () => {
       it('200 상태를 반환합니다.', async () => {
         return request(app.getHttpServer())
-          .patch(`/schools/feeds/${mockSchool1FeedDocumentList[0]._id}`)
+          .patch(`/schools/feeds/${mockSchool1FeedDocumentList1[0]._id}`)
           .send(updateFeedDto)
           .expect(200);
       });
@@ -158,7 +158,7 @@ describe('Schools (e2e)', () => {
         jest.spyOn(feedsRepository, 'findOneAndUpdate').mockRejectedValueOnce(new InternalServerErrorException());
 
         return request(app.getHttpServer())
-          .patch(`/schools/feeds/${mockSchool1FeedDocumentList[0]._id}`)
+          .patch(`/schools/feeds/${mockSchool1FeedDocumentList1[0]._id}`)
           .send(updateFeedDto)
           .expect(500);
       });
@@ -168,7 +168,7 @@ describe('Schools (e2e)', () => {
   describe('DELETE /schools/feeds/:feedId', () => {
     describe('성공 시', () => {
       it('200 상태를 반환합니다.', async () => {
-        return request(app.getHttpServer()).delete(`/schools/feeds/${mockSchool1FeedDocumentList[0]._id}`).expect(200);
+        return request(app.getHttpServer()).delete(`/schools/feeds/${mockSchool1FeedDocumentList1[0]._id}`).expect(200);
       });
     });
 
@@ -176,7 +176,7 @@ describe('Schools (e2e)', () => {
       it('데이터베이스 에러의 경우, 500 상태를 반환합니다. ', async () => {
         jest.spyOn(feedsRepository, 'findOneAndUpdate').mockRejectedValueOnce(new InternalServerErrorException());
 
-        return request(app.getHttpServer()).delete(`/schools/feeds/${mockSchool1FeedDocumentList[0]._id}`).expect(500);
+        return request(app.getHttpServer()).delete(`/schools/feeds/${mockSchool1FeedDocumentList1[0]._id}`).expect(500);
       });
     });
   });

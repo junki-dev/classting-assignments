@@ -15,6 +15,8 @@
     "^@common/(.*)$": "<rootDir>/src/common/$1/",
     "^@schools/(.*)$": "<rootDir>/src/schools/$1/",
     "^@users/(.*)$": "<rootDir>/src/users/$1/",
-    "^@auth/(.*)$": "<rootDir>/src/auth/$1/"
+    "^@auth/(.*)$": "<rootDir>/src/auth/$1/",
+    "^@subscribes/(.*)$": "<rootDir>/src/subscribes/$1/",
+    "^@utils/(.*)$": "<rootDir>/src/utils/$1/"
   }
 }

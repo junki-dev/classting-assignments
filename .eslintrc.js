@@ -56,6 +56,8 @@ module.exports = {
           ['@schools', './src/schools'],
           ['@users', './src/users'],
           ['@auth', './src/auth'],
+          ['@subscribes', './src/subscribes'],
+          ['@utils', './src/utils'],
         ],
       },
     },

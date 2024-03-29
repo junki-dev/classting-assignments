@@ -7,7 +7,9 @@
       "@common/*": ["src/common/*"],
       "@schools/*": ["src/schools/*"],
       "@users/*": ["src/users/*"],
-      "@auth/*": ["src/auth/*"]
+      "@auth/*": ["src/auth/*"],
+      "@subscribes/*": ["src/subscribes/*"],
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

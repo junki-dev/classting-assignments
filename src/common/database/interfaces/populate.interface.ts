@@ -4,4 +4,5 @@ export interface PopulateOptions {
   path: string;
   match?: Record<string, unknown>;
   options?: Record<'sort', SortOptions>;
+  populate?: PopulateOptions;
 }

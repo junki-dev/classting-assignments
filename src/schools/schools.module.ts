@@ -19,5 +19,6 @@ import { SchoolsRepository } from '@schools/repositories/schools.repository';
   ],
   controllers: [SchoolsController],
   providers: [SchoolsService, SchoolsRepository, FeedsRepository],
+  exports: [SchoolsRepository],
 })
 export class SchoolsModule {}

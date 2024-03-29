@@ -1,5 +1,5 @@
 import { Logger, NotFoundException } from '@nestjs/common';
-import { FilterQuery, Model, Types, UpdateQuery } from 'mongoose';
+import { FilterQuery, Model, PipelineStage, Types, UpdateQuery } from 'mongoose';
 
 import { AbstractDocument } from './abstract.schema';
 
@@ -27,8 +27,8 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     await this.model.insertMany(createDocuments);
   }
 
-  async findOne(filterQuery: FilterQuery<TDocument>) {
-    return this.model.findOne(filterQuery, {}, { lean: true }); // { lean: true } : mongoDB document 가 아닌 javascript object를 반환함
+  async findOne(filterQuery: FilterQuery<TDocument>, populate?: PopulateOptions) {
+    return this.model.findOne(filterQuery, {}, { lean: true }).populate(populate); // { lean: true } : mongoDB document 가 아닌 javascript object 를 반환함
   }
 
   async findOneAndUpdate(filterQuery: FilterQuery<TDocument>, update: UpdateQuery<TDocument>) {
@@ -54,5 +54,9 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
   async findOneAndDelete(filterQuery: FilterQuery<TDocument>) {
     return this.model.findOneAndDelete(filterQuery, { lean: true });
+  }
+
+  async aggregate(pipeline?: PipelineStage[]): Promise<TDocument[]> {
+    return this.model.aggregate(pipeline);
   }
 }

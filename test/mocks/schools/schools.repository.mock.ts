@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { Types } from 'mongoose';
 
-import { mockSchool1FeedDocumentList } from './feeds.repository.mock';
+import { mockSchool1FeedDocumentList1, mockSchool1FeedDocumentList2 } from './feeds.repository.mock';
 
 import { SchoolDocument } from '@schools/models/school.schema';
 
@@ -11,7 +11,7 @@ export const mockSchoolDocumentList: SchoolDocument[] = [
     name: 'test school one',
     location: 'seoul',
     adminId: new Types.ObjectId('6603e88fad74c24305aa42ca'),
-    feedList: mockSchool1FeedDocumentList,
+    feedList: mockSchool1FeedDocumentList1,
     createdAt: moment().startOf('m').subtract(2, 'h').toDate(),
   },
   {
@@ -19,7 +19,7 @@ export const mockSchoolDocumentList: SchoolDocument[] = [
     name: 'test school two',
     location: 'busan',
     adminId: new Types.ObjectId('6603e88fad74c24305aa42ca'),
-    feedList: [],
+    feedList: mockSchool1FeedDocumentList2,
     createdAt: moment().startOf('m').subtract(2, 'h').toDate(),
   },
 ];

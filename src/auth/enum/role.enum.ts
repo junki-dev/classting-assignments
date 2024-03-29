@@ -1,6 +1,6 @@
 export const RoleEnum = {
-  Admin: 'admin',
-  Student: 'student',
+  ADMIN: 'admin',
+  STUDENT: 'student',
 } as const;
 
 export type RoleEnumType = (typeof RoleEnum)[keyof typeof RoleEnum];
