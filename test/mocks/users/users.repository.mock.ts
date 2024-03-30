@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { Types } from 'mongoose';
 
-import { mockSchoolDocumentList } from './../schools/schools.repository.mock';
+import { mockSchoolDocumentList } from '../schools/schools.repository.mock';
 
 import { UserDocument } from '@users/models/user.schema';
 
