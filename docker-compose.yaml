@@ -4,12 +4,12 @@ services:
     build:
       context: .
       dockerfile: ./dockerfile
-      target: development
-    command: yarn start:dev
+#      target: development    # For development
+#    command: yarn start:dev  # For development
+    env_file:
+      - .env
     ports:
       - 8000:8000
-    volumes:
-      - .:/usr/app
     depends_on:
       - mongo
 
