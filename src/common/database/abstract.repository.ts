@@ -59,4 +59,8 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   async aggregate(pipeline?: PipelineStage[]): Promise<TDocument[]> {
     return this.model.aggregate(pipeline);
   }
+
+  async estimatedDocumentCount(): Promise<number> {
+    return this.model.estimatedDocumentCount();
+  }
 }

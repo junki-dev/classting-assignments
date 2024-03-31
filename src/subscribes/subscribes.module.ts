@@ -14,6 +14,6 @@ import { SchoolsModule } from '@schools/schools.module';
     SchoolsModule,
   ],
   providers: [SubscribesService, SubscribesRepository],
-  exports: [SubscribesService],
+  exports: [SubscribesService, SubscribesRepository],
 })
 export class SubscribesModule {}

@@ -176,3 +176,8 @@ $ make e2e-cov
     
   [PATCH] /users/subscriptions/schools/feeds
 ```
+
+## Additional Information
+
+- .env 파일은 원활한 테스트 진행 위해 제공됩니다.
+- 프로그램이 실행되면서 샘플데이터를 생성합니다. 이를 원치 않을 경우, .env 파일의 `GENERATE_SAMPLE_DATA=false`로 변경하세요.
